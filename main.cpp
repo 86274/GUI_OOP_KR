@@ -19,7 +19,6 @@ int main(int argc, char *argv[])
         }
     }
     MainWindow w;
-    w.startCladMans();
     w.show();
 
     return a.exec();

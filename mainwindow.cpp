@@ -4,11 +4,31 @@
 #include "cladman.h"
 #include <QTextStream>
 
-cladMan cm(5);
-
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+        cm = new cladMan(5);
+
+        // Инициализируем второе окно
+        sWindow = new EventManagementWindow();
+        // подключаем к слоту запуска главного окна по кнопке во втором окне
+        connect(sWindow, &EventManagementWindow::firstWindow, this, &MainWindow::show);
+
+        // подключаем к слоту функции оправки в очередь по кнопке во втором окне
+        connect(sWindow, &EventManagementWindow::pushGo, this, &MainWindow::inClad);
+        // подключаем к слоту функции освобождения кладовщика по кнопке во втором окне
+        connect(sWindow, &EventManagementWindow::pushFree, this, &MainWindow::freeClad);
+        connect(sWindow, &EventManagementWindow::pushFree2, this, &MainWindow::freeClad2);
+        connect(sWindow, &EventManagementWindow::pushFree3, this, &MainWindow::freeClad3);
+        connect(sWindow, &EventManagementWindow::pushFree4, this, &MainWindow::freeClad4);
+        connect(sWindow, &EventManagementWindow::pushFree5, this, &MainWindow::freeClad5);
+
+
+        // Инициализируем третье окно
+        thirdWindow = new ObjectStatusDisplaywindow();
+        // подключаем к слоту запуска главного окна по кнопке в третьем окне
+        connect(thirdWindow, &ObjectStatusDisplaywindow::firstWindow, this, &MainWindow::show);
 }
 
 MainWindow::~MainWindow()
@@ -16,123 +36,35 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::startCladMans() //Отображение стартовой информации о занятости кладовщиков
+void MainWindow::on_pushButton_clicked()
 {
-    ui->cladMans->setText("Кладовщик 1");
-    ui->freeMans->setText("Свободен");
-    ui->cladMans_2->setText("Кладовщик 2");
-    ui->freeMans_2->setText("Свободен");
-    ui->cladMans_3->setText("Кладовщик 3");
-    ui->freeMans_3->setText("Свободен");
-    ui->cladMans_4->setText("Кладовщик 4");
-    ui->freeMans_4->setText("Свободен");
-    ui->cladMans_5->setText("Кладовщик 5");
-    ui->freeMans_5->setText("Свободен");
+    sWindow->show();  // Показываем второе окно
+    this->close();    // Закрываем основное окно
 }
 
-void MainWindow::on_pushGo_pressed() //Кнопка отправления рабочего к кладовщику
+void MainWindow::on_pushButton_2_clicked()
 {
-
-    int numberCladMan = cm.inClad();
-    switch (numberCladMan) {
-    case 0:
-        ui->freeMans->setText("Занят");
-        break;
-    case 1:
-        ui->freeMans_2->setText("Занят");
-        break;
-    case 2:
-        ui->freeMans_3->setText("Занят");
-        break;
-    case 3:
-        ui->freeMans_4->setText("Занят");
-        break;
-    case 4:
-        ui->freeMans_5->setText("Занят");
-        break;
-    case 5:
-    {
-        int numberQueue = cm.inQueue();
-        if (numberQueue == 0)
-            ui->noQueue->setText("Очередь переполнена, попробуйте позже");
-        else if (numberQueue == 1)
-            ui->queue_0->setText("Занято");
-        else ui->queue_1->setText("Занято");
-    }
-        break;
-    default:
-        break;
-    }
-
+    thirdWindow->startCladMans(cm);
+    thirdWindow->show();  // Показываем третье окно
+    this->close();    // Закрываем основное окно
 }
 
-void MainWindow::on_pushFree_pressed(){
-
-    int i = cm.freeClad(0);
-    if(i == 1) {
-        ui->freeMans->setText("Свободен");
-    } else
-        if(i == -1){
-            ui->queue_1->setText("");
-            ui->noQueue->setText("");
-        } else
-            if (i == 0) {
-               ui->queue_0->setText("");
-            }
+void MainWindow::inClad(){
+    cm->inClad();
 }
 
-void MainWindow::on_pushFree2_pressed(){
-    int i = cm.freeClad(1);
-    if(i == 1) {
-        ui->freeMans_2->setText("Свободен");
-    } else
-        if(i == -1){
-            ui->queue_1->setText("");
-            ui->noQueue->setText("");
-        } else
-            if (i == 0) {
-               ui->queue_0->setText("");
-            }
+void MainWindow::freeClad(){
+    cm->freeClad(0);
 }
-
-void MainWindow::on_pushFree3_pressed(){
-    int i = cm.freeClad(2);
-    if(i == 1) {
-        ui->freeMans_3->setText("Свободен");
-    } else
-        if(i == -1){
-            ui->queue_1->setText("");
-            ui->noQueue->setText("");
-        } else
-            if (i == 0) {
-               ui->queue_0->setText("");
-            }
+void MainWindow::freeClad2(){
+    cm->freeClad(1);
 }
-
-void MainWindow::on_pushFree4_pressed(){
-    int i = cm.freeClad(3);
-    if(i == 1) {
-        ui->freeMans_4->setText("Свободен");
-    } else
-        if(i == -1){
-            ui->queue_1->setText("");
-            ui->noQueue->setText("");
-        } else
-            if (i == 0) {
-               ui->queue_0->setText("");
-            }
+void MainWindow::freeClad3(){
+    cm->freeClad(2);
 }
-
-void MainWindow::on_pushFree5_pressed(){
-    int i = cm.freeClad(4);
-    if(i == 1) {
-        ui->freeMans_5->setText("Свободен");
-    } else
-        if(i == -1){
-            ui->queue_1->setText("");
-            ui->noQueue->setText("");
-        } else
-            if (i == 0) {
-               ui->queue_0->setText("");
-            }
+void MainWindow::freeClad4(){
+    cm->freeClad(3);
+}
+void MainWindow::freeClad5(){
+    cm->freeClad(4);
 }

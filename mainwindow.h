@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <cladman.h>
+#include "objectStatusDisplayWindow.h"
+#include "eventmanagementwindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -15,18 +17,27 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void startCladMans(); //Отображение стартовой информации о занятости кладовщиков
 
 private slots:
 
-    void on_pushGo_pressed(); //кнопка отправить в очередь
-    void on_pushFree_pressed(); //кнопки освобождения кладовщика
-    void on_pushFree2_pressed();
-    void on_pushFree3_pressed();
-    void on_pushFree4_pressed();
-    void on_pushFree5_pressed();
+    // Слоты от кнопок главного окна
+        void on_pushButton_clicked();
+        void on_pushButton_2_clicked();
 
 private:
     Ui::MainWindow *ui;
+    // второе и третье окна
+        EventManagementWindow *sWindow;
+        ObjectStatusDisplaywindow *thirdWindow;
+
+        cladMan* cm;
+
+        void inClad(); //отправить в очередь
+        //освободить кладовщика
+        void freeClad();
+        void freeClad2();
+        void freeClad3();
+        void freeClad4();
+        void freeClad5();
 };
 #endif // MAINWINDOW_H

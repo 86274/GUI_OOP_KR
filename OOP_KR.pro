@@ -10,15 +10,21 @@ CONFIG += c++11
 
 SOURCES += \
     cladman.cpp \
+    eventmanagementwindow.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    objectStatusDisplayWindow.cpp
 
 HEADERS += \
     cladman.h \
-    mainwindow.h
+    eventmanagementwindow.h \
+    mainwindow.h \
+    objectStatusDisplayWindow.h
 
 FORMS += \
-    mainwindow.ui
+    eventmanagementwindow.ui \
+    mainwindow.ui \
+    objectStatusDisplayWindow.ui
 
 TRANSLATIONS += \
     OOP_KR_ru_RU.ts

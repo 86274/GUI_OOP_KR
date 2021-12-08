@@ -15,7 +15,7 @@ cladMan::~cladMan()
 
 }
 
-int cladMan::inClad()
+void cladMan::inClad()
 {
     if (sFree > 0)
     {
@@ -23,24 +23,18 @@ int cladMan::inClad()
         int i = rand() % sFree;
         std::swap(team[i], team[sFree - 1]);
         --sFree;
-        return team[sFree];
     } else
-    {
-        return 5;
-    }
+        inQueue();
+
 }
 
-int cladMan::inQueue()
+void cladMan::inQueue()
 {
     if (q.size() < 2)
         q.push(1);
-    else
-        return 0;
-
-    return q.size();
 }
 
-int cladMan::freeClad(int numberClad)
+void cladMan::freeClad(int numberClad)
 {
     int i = sFree;
     while(team[i] != numberClad && i < 5){
@@ -55,10 +49,21 @@ int cladMan::freeClad(int numberClad)
         {
             q.pop();
             inClad();
-            return -(q.size());
         }
-        return 1;
-    } else
-        return 2;
+    }
 }
 
+bool cladMan::getFreeCladMan(int numberClad)
+{
+    for (int i = 0; i < sFree; i++)
+    {
+        if(team[i] == numberClad)
+            return 1;
+    }
+    return 0;
+}
+
+int cladMan::getQueueSize()
+{
+    return q.size();
+}

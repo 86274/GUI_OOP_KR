@@ -9,9 +9,11 @@ public:
     cladMan(int count);
     ~cladMan();
 
-    int inClad(); //выбрать рандомного свободного кладовщика
-    int inQueue(); // поставить рабочего в очередь
-    int freeClad(int numberClad); //освободить кладовщика
+    void inClad(); //выбрать рандомного свободного кладовщика
+    void inQueue(); // поставить рабочего в очередь
+    void freeClad(int numberClad); //освободить кладовщика
+    bool getFreeCladMan(int numberClad); //проверить свободен ли кладовщик
+    int getQueueSize(); //проверить сколько стоит рабочих в очереди
 
 private:
     std::array<int, 5> team; //команда кладовщиков
