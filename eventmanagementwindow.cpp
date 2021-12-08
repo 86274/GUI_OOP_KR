@@ -18,7 +18,7 @@ void EventManagementWindow::on_pushGo_pressed() //Кнопка отправле�
     emit pushGo();
 }
 
-void EventManagementWindow::on_pushFree_pressed(){
+void EventManagementWindow::on_pushFree_pressed(){//Кнопка освобождения рабочего
     emit pushFree();
 }
 
@@ -41,5 +41,5 @@ void EventManagementWindow::on_pushFree5_pressed(){
 void EventManagementWindow::on_pushButton_clicked()
 {
     this->close();      // Закрываем окно
-    emit firstWindow(); // И вызываем сигнал на открытие главного окна
+    emit firstWindow(); // И вызываем сигнал на открытие основного окна
 }

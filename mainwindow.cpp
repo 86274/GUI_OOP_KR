@@ -10,14 +10,14 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWin
 
         cm = new cladMan(5);
 
-        // Инициализируем второе окно
+        // Инициализируем окно управления
         sWindow = new EventManagementWindow();
-        // подключаем к слоту запуска главного окна по кнопке во втором окне
+        // подключаем к слоту запуска главного окна по кнопке в окне управления
         connect(sWindow, &EventManagementWindow::firstWindow, this, &MainWindow::show);
 
-        // подключаем к слоту функции оправки в очередь по кнопке во втором окне
+        // подключаем к слоту функции оправки в очередь по кнопке в окне управления
         connect(sWindow, &EventManagementWindow::pushGo, this, &MainWindow::inClad);
-        // подключаем к слоту функции освобождения кладовщика по кнопке во втором окне
+        // подключаем к слоту функции освобождения кладовщика по кнопке в окне управления
         connect(sWindow, &EventManagementWindow::pushFree, this, &MainWindow::freeClad);
         connect(sWindow, &EventManagementWindow::pushFree2, this, &MainWindow::freeClad2);
         connect(sWindow, &EventManagementWindow::pushFree3, this, &MainWindow::freeClad3);
@@ -25,9 +25,9 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWin
         connect(sWindow, &EventManagementWindow::pushFree5, this, &MainWindow::freeClad5);
 
 
-        // Инициализируем третье окно
+        // Инициализируем окно информации
         thirdWindow = new ObjectStatusDisplaywindow();
-        // подключаем к слоту запуска главного окна по кнопке в третьем окне
+        // подключаем к слоту запуска главного окна по кнопке в окне информации
         connect(thirdWindow, &ObjectStatusDisplaywindow::firstWindow, this, &MainWindow::show);
 }
 
@@ -38,14 +38,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    sWindow->show();  // Показываем второе окно
+    sWindow->show();  // Показываем окно управления
     this->close();    // Закрываем основное окно
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
     thirdWindow->startCladMans(cm);
-    thirdWindow->show();  // Показываем третье окно
+    thirdWindow->show();  // Показываем окно информации
     this->close();    // Закрываем основное окно
 }
 
