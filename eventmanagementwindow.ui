@@ -17,9 +17,9 @@
    <widget class="QPushButton" name="pushFree2">
     <property name="geometry">
      <rect>
-      <x>220</x>
+      <x>200</x>
       <y>230</y>
-      <width>161</width>
+      <width>181</width>
       <height>51</height>
      </rect>
     </property>
@@ -43,9 +43,9 @@
    <widget class="QPushButton" name="pushFree5">
     <property name="geometry">
      <rect>
-      <x>570</x>
+      <x>550</x>
       <y>140</y>
-      <width>161</width>
+      <width>181</width>
       <height>51</height>
      </rect>
     </property>
@@ -71,7 +71,7 @@
      <rect>
       <x>416</x>
       <y>230</y>
-      <width>151</width>
+      <width>181</width>
       <height>51</height>
      </rect>
     </property>
