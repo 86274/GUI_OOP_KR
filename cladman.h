@@ -3,22 +3,23 @@
 #include "array"
 #include "queue"
 
-class cladMan //кладовщик
+constexpr int countCladMan{5};
+
+class CladMan //кладовщик
 {
 public:
-    cladMan(int count);
-    ~cladMan();
+    CladMan();
 
     void inClad(); //выбрать рандомного свободного кладовщика
     void inQueue(); // поставить рабочего в очередь
-    void freeClad(int numberClad); //освободить кладовщика
-    bool getFreeCladMan(int numberClad); //проверить свободен ли кладовщик
-    int getQueueSize(); //проверить сколько стоит рабочих в очереди
+    void freeClad(const int& numberClad); //освободить кладовщика
+    bool getFreeCladMan(const int& numberClad) const; //проверить свободен ли кладовщик
+    int getQueueSize() const; //проверить сколько стоит рабочих в очереди
 
 private:
-    std::array<int, 5> team; //команда кладовщиков
-    std::queue<bool> q; //очередь к кладовщикам
-    int sFree; //свободный кладовщиков
+    std::array<int, countCladMan> m_team; //команда кладовщиков
+    std::queue<bool> m_queue; //очередь к кладовщикам
+    int m_cladManFree; //свободных кладовщиков
 };
 
 

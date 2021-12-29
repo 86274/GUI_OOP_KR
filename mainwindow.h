@@ -20,24 +20,24 @@ public:
 
 private slots:
 
-    // Слоты от кнопок главного окна
-        void on_pushButton_clicked();
-        void on_pushButton_2_clicked();
+    // Слоты кнопок главного окна
+    void on_pushButton_clicked();
+    void on_pushButton_2_clicked();
 
 private:
     Ui::MainWindow *ui;
     // второе и третье окна
-        EventManagementWindow *sWindow;
-        ObjectStatusDisplaywindow *thirdWindow;
+    EventManagementWindow *sWindow;
+    ObjectStatusDisplaywindow *thirdWindow;
 
-        cladMan* cm;
+    CladMan cm;
 
-        void inClad(); //отправить в очередь
-        //освободить кладовщика
-        void freeClad();
-        void freeClad2();
-        void freeClad3();
-        void freeClad4();
-        void freeClad5();
+    void inClad(); //отправить в очередь
+    //освободить кладовщика
+    void freeClad();
+    void freeClad2();
+    void freeClad3();
+    void freeClad4();
+    void freeClad5();
 };
 #endif // MAINWINDOW_H

@@ -16,7 +16,7 @@ public:
     explicit ObjectStatusDisplaywindow(QWidget *parent = nullptr);
     ~ObjectStatusDisplaywindow();
 
-    void startCladMans(cladMan* cm); //Отображение стартовой информации о занятости кладовщиков
+    void startCladMans(CladMan& cm); //Отображение стартовой информации о занятости кладовщиков
 
 signals:
     void firstWindow();  // Сигнал для первого окна на открытие

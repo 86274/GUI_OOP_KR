@@ -2,68 +2,62 @@
 #include <QTextStream>
 #include "chrono"
 
-
-cladMan::cladMan(int count)
+CladMan::CladMan()
 {
-    sFree = count;
-    count++;
-    team = {0, 1, 2, 3, 4};
+    m_cladManFree = countCladMan;
+    m_team[0] = 0;
+    for (int i = 1; i < countCladMan; ++i) {
+        m_team[i] = 1 + m_team[i - 1];
+    }
 }
 
-cladMan::~cladMan()
+void CladMan::inClad()
 {
-
-}
-
-void cladMan::inClad()
-{
-    if (sFree > 0)
+    if (m_cladManFree > 0)
     {
         std::srand(std::time(NULL));
-        int i = rand() % sFree;
-        std::swap(team[i], team[sFree - 1]);
-        --sFree;
+        int i = rand() % m_cladManFree;
+        std::swap(m_team[i], m_team[m_cladManFree - 1]);
+        --m_cladManFree;
     } else
         inQueue();
-
 }
 
-void cladMan::inQueue()
+void CladMan::inQueue()
 {
-    if (q.size() < 2)
-        q.push(1);
+    if (m_queue.size() < 2)
+        m_queue.push(1);
 }
 
-void cladMan::freeClad(int numberClad)
+void CladMan::freeClad(const int& numberClad)
 {
-    int i = sFree;
-    while(team[i] != numberClad && i < 5){
+    int i = m_cladManFree;
+    while(m_team[i] != numberClad && i < 5){
         ++i;
     }
     if (i < 5){
+        ++m_cladManFree;
+        std::swap(m_team[i], m_team[m_cladManFree-1]);
 
-        ++sFree;
-        std::swap(team[i], team[sFree-1]);
-
-        if(q.size() > 0)
+        if(m_queue.size() > 0)
         {
-            q.pop();
+            m_queue.pop();
             inClad();
         }
     }
 }
 
-bool cladMan::getFreeCladMan(int numberClad)
+bool CladMan::getFreeCladMan(const int& numberClad) const
 {
-    for (int i = 0; i < sFree; i++)
+    for (int i = 0; i < m_cladManFree; i++)
     {
-        if(team[i] == numberClad)
+        if(m_team[i] == numberClad)
             return 1;
     }
     return 0;
 }
 
-int cladMan::getQueueSize()
+int CladMan::getQueueSize() const
 {
-    return q.size();
+    return m_queue.size();
 }

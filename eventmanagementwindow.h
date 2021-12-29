@@ -18,7 +18,8 @@ public:
 
 signals:
     void firstWindow();  // Сигнал для первого окна на открытие
-    void pushGo();
+    void pushGo(); // Сигнал отправки рабочего к кладовщику
+    // Сигналы освобождения кладовщика
     int pushFree();
     int pushFree2();
     int pushFree3();
@@ -27,7 +28,8 @@ signals:
 
 private slots:
     void on_pushGo_pressed(); //кнопка отправить в очередь
-    void on_pushFree_pressed(); //кнопки освобождения кладовщика
+    //кнопки освобождения кладовщика
+    void on_pushFree_pressed();
     void on_pushFree2_pressed();
     void on_pushFree3_pressed();
     void on_pushFree4_pressed();
